@@ -40,6 +40,19 @@
     return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
   }
 
+  function initialWeekIndex(data) {
+    if (!data || !data.weeks.length) return 0;
+    var t = todayStr();
+    for (var i = 0; i < data.weeks.length; i++) {
+      var m = data.weeks[i].monday;
+      var end = parseDate(m);
+      end.setDate(end.getDate() + 6);
+      if (t >= m && t <= endStr(end)) return i;
+    }
+    if (t < data.weeks[0].monday) return 0;
+    return data.weeks.length - 1;
+  }
+
   function build() {
     var data = state.data;
     var rowH = ROW_H;
@@ -161,7 +174,7 @@
     strip.innerHTML = "";
     strip.appendChild(fragment);
     termLabel.textContent = data.grade || data.term || "";
-    setWeek(0, false);
+    setWeek(initialWeekIndex(data), false);
     state.panels[0].scroller.scrollTop = 0;
     requestAnimationFrame(syncGlobalWeek);
   }
@@ -243,14 +256,7 @@
     var t = todayStr();
     var data = state && state.data;
     if (!data) return;
-    var idx = 0;
-    for (var i = 0; i < data.weeks.length; i++) {
-      var m = data.weeks[i].monday;
-      var end = new Date(parseDate(m).getTime());
-      end.setDate(end.getDate() + 6);
-      if (t >= m && t <= endStr(end)) { idx = i; break; }
-    }
-    setWeek(idx, true);
+    setWeek(initialWeekIndex(data), true);
   });
 
   function endStr(d) {
