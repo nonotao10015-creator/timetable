@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#f6f6f8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>医学院课表</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="topbar-main">
+        <div>
+          <h1 id="monthTitle">课表</h1>
+          <p id="termLabel">加载中…</p>
+        </div>
+        <div class="today-wrap">
+          <button id="todayBtn" type="button">今天</button>
+        </div>
+      </div>
+      <div class="weeknav">
+        <button id="prevBtn" type="button" aria-label="上一周">‹</button>
+        <div class="weeknav-text">
+          <strong id="weekLabel">—</strong>
+          <span id="weekDates">—</span>
+        </div>
+        <button id="nextBtn" type="button" aria-label="下一周">›</button>
+      </div>
+    </header>
+
+    <main id="weekStrip" aria-live="polite"></main>
+
+    <div id="emptyTip" class="empty-tip" hidden>
+      正在读取课表数据…如果长时间没有内容，请确认已在电脑上启动本地服务器。
+    </div>
+  </div>
+
+  <div id="sheet" hidden>
+    <div class="sheet-backdrop" id="sheetBackdrop"></div>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetCourse">
+      <div class="sheet-grabber"></div>
+      <div class="sheet-head">
+        <span class="sheet-chip">课程信息</span>
+        <button class="sheet-close" id="sheetClose" type="button" aria-label="关闭">✕</button>
+      </div>
+      <h2 id="sheetCourse"></h2>
+      <div class="detail-card" id="detailRows"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
