@@ -172,7 +172,10 @@ struct ScheduleHomeView: View {
                 return week.week
             }
         }
-        return data.weeks.first?.week ?? 1
+        if let first = data.weeks.first, today < date(first.monday) {
+            return first.week
+        }
+        return data.weeks.last?.week ?? data.weeks.first?.week ?? 1
     }
 
     var body: some View {
