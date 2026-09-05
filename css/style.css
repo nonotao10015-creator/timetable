@@ -217,6 +217,10 @@ button {
   color: var(--text);
 }
 
+.period-label span {
+  display: block;
+}
+
 .lunch-line,
 .lunch-band {
   position: absolute;
