@@ -1,4 +1,4 @@
-var CACHE = "myshsmu-timetable-v2";
+var CACHE = "myshsmu-timetable-v3";
 var ASSETS = [
   "./",
   "./index.html",
