@@ -285,7 +285,7 @@ struct WeekPage: View {
     private let timeW: CGFloat = 46
 
     private var totalHeight: CGFloat {
-        5 * rowH + lunchH + 8 * rowH
+        5 * rowH + lunchH + CGFloat(max(0, data.periods.count - 5)) * rowH
     }
 
     private func periodY(_ p: Int) -> CGFloat {
@@ -344,11 +344,14 @@ struct WeekPage: View {
 
     private func timeColumn(width: CGFloat, total: CGFloat) -> some View {
         ZStack(alignment: .topLeading) {
-            ForEach(1...13, id: \.self) { p in
+            ForEach(1...data.periods.count, id: \.self) { p in
                 VStack(spacing: 0) {
                     Text("\(p)")
                         .font(.system(size: 12, weight: .semibold))
                     Text(data.periods[p - 1].start)
+                        .font(.system(size: 9))
+                        .foregroundStyle(.secondary)
+                    Text(data.periods[p - 1].end)
                         .font(.system(size: 9))
                         .foregroundStyle(.secondary)
                 }
