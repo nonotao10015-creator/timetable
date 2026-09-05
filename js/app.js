@@ -111,8 +111,11 @@
         b.textContent = String(idx + 1);
         var t = document.createElement("span");
         t.textContent = p.start;
+        var e = document.createElement("span");
+        e.textContent = p.end;
         label.appendChild(b);
         label.appendChild(t);
+        label.appendChild(e);
         timeCol.appendChild(label);
       });
       var lunch = document.createElement("div");
